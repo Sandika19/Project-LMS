@@ -50,8 +50,9 @@
 								<div class="w-full flex items-center justify-between">
 									<div class="flex items-center gap-6">
 										<div>
-											<input class="peer hidden" id="student" type="checkbox" name="student">
-											<label for="student"
+											<input class="peer hidden" id="student-{{ $loop->iteration }}" type="checkbox"
+												name="student-{{ $loop->iteration }}">
+											<label for="student-{{ $loop->iteration }}"
 												class="size-7 rounded-md flex items-center justify-center peer-checked:bg-[#757575] border-[3px] border-[#757575] peer-checked:has-[i]:flex">
 												<i class="fa-solid fa-check text-white hidden"></i>
 											</label>
