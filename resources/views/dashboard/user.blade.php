@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-<<<<<<< HEAD
-<html lang="en" class="bg-[#E8E8E8] scroll-smooth  ">
-=======
 <html lang="en" class="bg-[#E8E8E8] scroll-smooth ">
->>>>>>> d30269b2e01ead91b916f0c346549e206a6a36b6
 
 	<head>
 		<meta charset="UTF-8">
