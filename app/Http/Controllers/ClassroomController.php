@@ -83,7 +83,7 @@ class ClassroomController extends Controller
 
    public function updateClass(Classroom $classroom, Request $request)
    {
-      dd($request);
+      
       $validatedData = $request->validate([
          "title" => "required|string|max:255",
          "class" => "required|in:x,xi,xii",
