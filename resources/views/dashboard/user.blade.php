@@ -40,12 +40,12 @@
 		{{-- != Main =! --}}
 
 		{{-- === Footer === --}}
-			<footer id="footer" class="lg:ml-[300px] ml-0">
-				<div class="w-full p-4 bg-[#4A5B92] text-center">
-					<h3 class="text-base font-normal text-white">© 2024 LMS SMKN 46 Jakarta | All Rights Reserved.</h3>
-				</div>
-			</footer>
-			{{-- != Footer =! --}}
+		<footer id="footer" class="lg:ml-[300px] ml-0">
+			<div class="w-full p-4 bg-[#4A5B92] text-center">
+				<h3 class="text-base font-normal text-white">© 2024 LMS SMKN 46 Jakarta | All Rights Reserved.</h3>
+			</div>
+		</footer>
+		{{-- != Footer =! --}}
 
 		<script src="{{ asset('js/user.js') }}"></script>
 		<script src="{{ asset('js/alert.js') }}"></script>
@@ -56,23 +56,24 @@
 
 <style>
 	/* CSS untuk container utama */
-.flex-container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Tinggi minimum sama dengan viewport */
-}
+	.flex-container {
+		display: flex;
+		flex-direction: column;
+		min-height: 100vh;
+		/* Tinggi minimum sama dengan viewport */
+	}
 
-/* Area konten utama */
-.content {
-    flex: 1; /* Konten utama akan mengisi ruang di antara header dan footer */
-}
+	/* Area konten utama */
+	.content {
+		flex: 1;
+		/* Konten utama akan mengisi ruang di antara header dan footer */
+	}
 
-/* Footer */
-.footer {
-    background-color: #4A5B92;
-    text-align: center;
-    padding: 16px;
-    color: white;
-}
-
+	/* Footer */
+	.footer {
+		background-color: #4A5B92;
+		text-align: center;
+		padding: 16px;
+		color: white;
+	}
 </style>
