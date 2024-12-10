@@ -25,16 +25,18 @@ class Student extends Model
       return $this->user_id && $this->fullname && $this->major; // Tambahkan kolom yang diperlukan
    }
 
-   public function getMajorAttribute($value)
-   {
-      $majors = [
-         "pplg" => "Pengembangan Perangkat Lunak dan Gim",
-         "dkv" => "Desain Komunikasi Visual",
-         "otkp" => "Otomatisasi dan Tata Kelola Perkantoran",
-         "akl" => "Akuntansi dan Keuangan Lembaga",
-         "bdp" => "Bisnis Daring dan Pemasaran",
-      ];
+   // public function getMajorAttribute($value)
+   // {
+   //    $majors = [
+   //       "pplg" => "Pengembangan Perangkat Lunak dan Gim",
+   //       "dkv" => "Desain Komunikasi Visual",
+   //       "otkp" => "Otomatisasi dan Tata Kelola Perkantoran",
+   //       "akl" => "Akuntansi dan Keuangan Lembaga",
+   //       "bdp" => "Bisnis Daring dan Pemasaran",
+   //    ];
 
-      return $majors[$value] ?? Str::upper($value);
-   }
+   //    return $majors[$value] ?? Str::upper($value);
+   // }
+
+   // public function changeNumber 
 }
