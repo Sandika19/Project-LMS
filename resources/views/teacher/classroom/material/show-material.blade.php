@@ -43,7 +43,8 @@
 				@else
 					<div class="my-5">
 						<p class="font-semibold">Link video:</p>
-						<a href="{{ $material->video_link }}" class="text-blue-500 underline">{{ $material->video_link }}</a>
+						<a href="{{ $material->video_link }}" target="_blank"
+							class="text-blue-500 underline">{{ $material->video_link }}</a>
 					</div>
 				@endif
 
