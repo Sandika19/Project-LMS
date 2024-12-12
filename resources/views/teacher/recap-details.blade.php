@@ -1,5 +1,7 @@
 @extends('dashboard.user')
-{{-- @dd($users) --}}
+{{-- @dd($assignments[0])
+@dd($submissions) --}}
+{{-- @dd($enrolledUsers) --}}
 @section('content')
 	<div class="p-3 mb-10">
 		<div class="max-w-5xl w-full mx-auto ">
@@ -32,26 +34,25 @@
 									@foreach ($assignments as $assignment)
 										<td class="py-2 pl-2">
 											@php
-												$submission = $user->submission
-												    ->where('material_id', $assignment->id)
+												$submission = $user->submissions
 												    ->where('classroom_id', $classroom->id)
+												    ->where('material_id', $assignment->id)
 												    ->where('user_id', $user->id)
 												    ->first();
 											@endphp
-											{{ $submission ? $submission->score : '-' }}
+											{{ optional($submission)->score ?? '-' }}
 										</td>
 									@endforeach
 									<td class="py-2 pl-2">
 										@php
-											$grades = $user->submission
-											    ? $user->submission
-											        ->where('user_id', $user->id)
-											        ->pluck('score')
-											        ->filter()
-											    : collect();
+											$grades = $user->submissions
+											    ->where('classroom_id', $classroom->id)
+											    ->where('user_id', $user->id)
+											    ->pluck('score')
+											    ->filter();
+
 											$average = $grades->isNotEmpty() ? $grades->avg() : '-';
 										@endphp
-
 										{{ $average !== '-' ? number_format($average, 2, ',', '.') : '-' }}
 									</td>
 									<td class="py-2 pl-2">

@@ -122,18 +122,23 @@ class TeacherController extends Controller
 
    public function showRecapDetails(Classroom $classroom)
    {
-      $assignment = Material::where("classroom_id", $classroom->id)
-         ->where("material_type", "assignment")
-         ->get();
+      $assignments = $classroom->materials->where("material_type", "assignment");
+      $assignmentIds = $assignments->pluck("id")->toArray();
 
       $enrolledUsers = $classroom->users()->wherePivot("status", "enrolled")->get();
-      // $submit = $enrolledUsers->submission->first();
+      $enrolledUserIds = $enrolledUsers->pluck("id")->toArray();
+
+      $studentSubmissions = Submission::whereIn("material_id", $assignmentIds)
+         ->where("classroom_id", $classroom->id)
+         ->where("user_id", $enrolledUserIds)
+         ->get();
 
       return view("teacher.recap-details", [
          "title" => "Recap",
          "classroom" => $classroom,
-         "assignments" => $assignment,
+         "assignments" => $assignments,
          "enrolledUsers" => $enrolledUsers,
+         "submissions" => $studentSubmissions,
       ]);
    }
 }
