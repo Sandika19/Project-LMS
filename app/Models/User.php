@@ -13,14 +13,14 @@ class User extends Authenticatable
 {
    use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $guarded = ['id'];
+   /**
+    * The attributes that are mass assignable.
+    *
+    * @var array<int, string>
+    */
+   protected $guarded = ["id"];
 
-    protected $table = 'users';
+   protected $table = "users";
 
    /**
     * The attributes that should be hidden for serialization.
@@ -75,8 +75,8 @@ class User extends Authenticatable
          ->withTimestamps();
    }
 
-   public function submission()
+   public function submissions()
    {
-      return $this->hasOne(Submission::class);
+      return $this->hasMany(Submission::class);
    }
 }
