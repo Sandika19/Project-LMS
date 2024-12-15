@@ -200,3 +200,16 @@ if (studentAssignmentForm) {
       element: studentAssignmentForm,
    });
 }
+
+// Confirmation Delete Student From Class
+const deleteStudentForm = document.querySelectorAll(".delete-student-form");
+if (deleteStudentForm) {
+   deleteStudentForm.forEach((deleteStudent) => {
+      warningAlert({
+         title: "Are You Sure?",
+         text: "Deleting this student will remove all their data permanently. This action is irreversible.",
+         confirmButtonText: "Delete",
+         element: deleteStudent,
+      });
+   });
+}

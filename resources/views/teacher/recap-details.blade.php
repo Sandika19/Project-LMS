@@ -1,7 +1,5 @@
 @extends('dashboard.user')
-{{-- @dd($assignments[0])
-@dd($submissions) --}}
-{{-- @dd($enrolledUsers) --}}
+
 @section('content')
 	<div class="p-3 mb-10">
 		<div class="max-w-5xl w-full mx-auto ">

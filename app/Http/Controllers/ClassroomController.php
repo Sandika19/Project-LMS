@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Teacher;
 use App\Models\Material;
 use App\Models\Classroom;
+use App\Models\Enrollment;
+use App\Models\Submission;
 use Illuminate\Http\Request;
 use PhpParser\Builder\Class_;
 use Illuminate\Support\Facades\Log;
@@ -83,7 +86,6 @@ class ClassroomController extends Controller
 
    public function updateClass(Classroom $classroom, Request $request)
    {
-      
       $validatedData = $request->validate([
          "title" => "required|string|max:255",
          "class" => "required|in:x,xi,xii",
@@ -128,5 +130,18 @@ class ClassroomController extends Controller
          "teacher" => $teacher,
          "enrolledUsers" => $enrolledUsers,
       ]);
+   }
+
+   public function deleteStudent(Classroom $classroom, User $user)
+   {
+      $enrollment = Enrollment::where("classroom_id", $classroom->id)
+         ->where("user_id", $user->id)
+         ->first();
+
+      if ($enrollment) {
+         $enrollment->delete();
+      }
+
+      return redirect()->back()->with("delete.student", "Student data has been removed successfully");
    }
 }

@@ -1,5 +1,4 @@
 @extends('dashboard.user')
-{{-- @dd($teacher->profile_picture) --}}
 @section('content')
 	<div class="sm:p-6 p-4 mb-8">
 		<div class="max-w-5xl w-full mx-auto rounded-md">
@@ -51,7 +50,7 @@
 										<div class="flex items-center gap-x-4">
 											<div class="w-[50px] h-[50px] overflow-hidden rounded-full">
 												<img class="w-full h-full object-cover object-center"
-													src="{{ Storage::url($user->student->profile_picture ?? '/profile-default/student-profile-default.png') }}">
+													src="{{ Storage::url($user->student->profile_picture ?? 'profile-default/student-profile-default.png') }}">
 											</div>
 											<p class="font-medium text-lg text-[#757575]">{{ $user->student->fullname }}</p>
 										</div>
@@ -63,10 +62,7 @@
 								</div>
 							</div>
 						@endforeach
-
 					</div>
-
-
 				</div>
 			</div>
 		</div>

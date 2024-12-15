@@ -95,6 +95,7 @@ Route::middleware(["auth"])->group(function () {
       Route::post("/teacher/classes/create-class/post", "createClass")->name("create.class");
       Route::get("/teacher/classes/{classroom}/classwork", "showClasswork")->name("show.classwork");
       Route::get("/teacher/classes/{classroom}/people", "showClassworkPeople")->name("show.classwork.people");
+      Route::delete("/teacher/classes/{classroom}/people/{user}/delete", "deleteStudent")->name("delete.student");
       Route::delete("/teacher/classes/{classroom}/delete", "deleteClass")->name("delete.class");
       Route::get("/teacher/classes/{classroom}/update-class", "showUpdateClass")->name("show.update.class");
       Route::put("/teacher/classes/{classroom}/update", "updateClass")->name("update.class");

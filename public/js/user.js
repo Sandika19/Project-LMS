@@ -154,19 +154,19 @@ if (addContentButton && dropdown) {
 const footerSection = document.getElementById("footer");
 
 function adjustFooterPosition() {
-    // Memeriksa apakah scroll bar muncul
-    if (document.body.scrollHeight <= window.innerHeight) {
-        // Jika tidak ada scrollbar, buat footer tetap di bawah
-        footerSection.classList.add("sticky-at-bottom");
-    } else {
-        // Jika ada scrollbar, hapus sticky class
-        footerSection.classList.remove("sticky-at-bottom");
-    }
+   // Memeriksa apakah scroll bar muncul
+   if (document.body.scrollHeight <= window.innerHeight) {
+      // Jika tidak ada scrollbar, buat footer tetap di bawah
+      footerSection.classList.add("sticky-at-bottom");
+   } else {
+      // Jika ada scrollbar, hapus sticky class
+      footerSection.classList.remove("sticky-at-bottom");
+   }
 }
 
 // Panggil fungsi saat halaman dimuat dan saat ukuran jendela berubah
-window.addEventListener('load', adjustFooterPosition);
-window.addEventListener('resize', adjustFooterPosition);
+window.addEventListener("load", adjustFooterPosition);
+window.addEventListener("resize", adjustFooterPosition);
 // == FOOTER =!
 
 // == STUDENT CLASSES ==
@@ -191,3 +191,24 @@ if (majorSelect) {
    });
 }
 // != STUDENT CLASSES =!
+
+// == DELETE STUDENT FROM CLASS ==
+const deleteStudentBtn = document.querySelectorAll(".delete-student-btn");
+const deleteStudentForms = document.querySelectorAll(".delete-student-form");
+
+if (deleteStudentBtn) {
+   deleteStudentBtn.forEach((btn, i) => {
+      btn.addEventListener("click", () => {
+         deleteStudentForms[i].classList.toggle("hidden");
+      });
+
+      document.addEventListener("click", (e) => {
+         if (!e.target.closest(".delete-student-btn")) {
+            deleteStudentForms.forEach((form) => {
+               form.classList.add("hidden");
+            });
+         }
+      });
+   });
+}
+// != DELETE STUDENT FROM CLASS =!
