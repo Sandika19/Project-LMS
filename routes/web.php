@@ -77,8 +77,12 @@ Route::middleware(["auth"])->group(function () {
    });
 
    Route::controller(TeacherController::class)->group(function () {
-      Route::get("/teacher/home", "index");
+      Route::get("/teacher/home", "index")->middleware("check.profile.data");
       Route::get("/teacher/classes", "showClasses");
+
+      Route::get("/teacher/complete-profile", "completeProfile");
+      Route::post("/teacher/complete-profile-post", "completeProfilePost");
+
       Route::get("/teacher/profile", "profile")->name("teacher.profile");
       Route::get("/teacher/update-profile/{teacher:nip}", "showUpdateProfile");
       Route::put("/teacher/update-profile/{teacher:nip}/put", "updateProfilePut")->name("teacher.update.pp");

@@ -44,7 +44,7 @@
 					@can('teacher')
 						<a
 							class="bg-[#A9BBF4] hover:bg-[#92a1d2] w-full flex items-center justify-center py-3 text-xl mt-6 font-semibold rounded"
-							href="/teacher/update-profile/{{ Auth::user()->teacher->nip }}">Update Profile</a>
+							href="/teacher/update-profile/{{ optional(Auth::user()->teacher)->nip }}">Update Profile</a>
 					@endcan
 
 					@can('student')

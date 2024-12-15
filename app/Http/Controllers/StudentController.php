@@ -46,7 +46,7 @@ class StudentController extends Controller
    public function completeProfile()
    {
       return view("student.complete-profile", [
-         "title" => "Update Profile",
+         "title" => "Complete Profile",
       ]);
    }
 

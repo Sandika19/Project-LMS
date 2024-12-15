@@ -16,6 +16,7 @@ return new class extends Migration {
          $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade");
          $table->string("fullname");
          $table->string("nip")->unique();
+         $table->enum("major", ["pplg", "dkv", "akl", "otkp", "bdp"]);
          $table->date("date_of_birth");
          $table->enum("gender", ["male", "female"]);
          $table->string("profile_picture")->nullable();

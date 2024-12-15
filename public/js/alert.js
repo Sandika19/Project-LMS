@@ -92,7 +92,7 @@ if (logoutForm) {
 }
 
 // Complete Profile Alert
-function completeProfileAlert(text) {
+function completeProfileAlert(text, role = "") {
    Swal.fire({
       title: "Profile Not Complete",
       text,
@@ -104,7 +104,7 @@ function completeProfileAlert(text) {
    }).then((result) => {
       if (result.isConfirmed) {
          // Redirect to the form page
-         window.location.href = "/complete-profile";
+         window.location.href = `${role}/complete-profile`;
       }
    });
 }
