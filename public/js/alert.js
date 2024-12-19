@@ -213,3 +213,18 @@ if (deleteStudentForm) {
       });
    });
 }
+
+const studentList = document.querySelector("#unenrolled-student-list");
+if (studentList) {
+   studentList.addEventListener("submit", function (e) {
+      if (e.target.classList.contains("enroll-student-form")) {
+         e.preventDefault();
+         warningAlert({
+            title: "Confirm Enrollment",
+            text: "You are about to enroll this student into your class. They will gain access to all related materials. Do you want to continue?",
+            confirmButtonText: "Enroll",
+            element: e.target,
+         });
+      }
+   });
+}

@@ -62,6 +62,20 @@ class DatabaseSeeder extends Seeder
             "password" => bcrypt("password"),
             "role" => "student",
          ],
+         [
+            "name" => "siswa",
+            "username" => "siswa",
+            "email" => "siswa4@lms.com",
+            "password" => bcrypt("password"),
+            "role" => "student",
+         ],
+         [
+            "name" => "siswa",
+            "username" => "siswa",
+            "email" => "siswa5@lms.com",
+            "password" => bcrypt("password"),
+            "role" => "student",
+         ],
       ]);
 
       Student::factory()->createMany([
@@ -92,6 +106,15 @@ class DatabaseSeeder extends Seeder
             "date_of_birth" => "2024-12-26",
             "gender" => "male",
          ],
+         [
+            "user_id" => 7,
+            "fullname" => "JKLJLJKJJ",
+            "nis" => 234033,
+            "major" => "dkv",
+            "grade" => "11",
+            "date_of_birth" => "2024-12-26",
+            "gender" => "male",
+         ],
       ]);
 
       Teacher::create([
@@ -102,48 +125,38 @@ class DatabaseSeeder extends Seeder
          "gender" => "Male",
       ]);
 
-      Classroom::create([
-         "teacher_id" => 1,
-         "title" => "HTML",
-         "class" => "x",
-         "thumbnail_class" => "thumbnail-class/tes1.jpg",
-         "major" => "pplg",
-         "instructions" =>
-            "Pelajari materi lorem10 dan CSS: Memahami teori dasar HTML dan CSS serta bagaimana keduanya digunakan untuk membuat dan mempercantik halaman web.Saksikan video pembelajaran: Menonton video tutorial atau penjelasan terkait konsep HTML dan CSS, seperti cara membuat struktur HTML atau menggunakan CSS untuk styling.Pelajari semua materinya: Memastikan setiap bagian materi yang disediakan, baik teori maupun praktik, dipelajari dengan teliti.",
-      ]);
-      Classroom::create([
-         "teacher_id" => 1,
-         "title" => "CSS",
-         "class" => "xi",
-         "thumbnail_class" => "thumbnail-class/tes1.jpg",
-         "major" => "pplg",
-         "instructions" =>
-            "Pelajari materi HTML dan CSS: Memahami teori dasar HTML dan CSS serta bagaimana keduanya digunakan untuk membuat dan mempercantik halaman web.Saksikan video pembelajaran: Menonton video tutorial atau penjelasan terkait konsep HTML dan CSS, seperti cara membuat struktur HTML atau menggunakan CSS untuk styling.Pelajari semua materinya: Memastikan setiap bagian materi yang disediakan, baik teori maupun praktik, dipelajari dengan teliti.",
-      ]);
-      Classroom::create([
-         "teacher_id" => 1,
-         "title" => "Laravel",
-         "class" => "xii",
-         "thumbnail_class" => "thumbnail-class/tes1.jpg",
-         "major" => "pplg",
-         "instructions" =>
-            "Pelajari materi HTML dan CSS: Memahami teori dasar HTML dan CSS serta bagaimana keduanya digunakan untuk membuat dan mempercantik halaman web.Saksikan video pembelajaran: Menonton video tutorial atau penjelasan terkait konsep HTML dan CSS, seperti cara membuat struktur HTML atau menggunakan CSS untuk styling.Pelajari semua materinya: Memastikan setiap bagian materi yang disediakan, baik teori maupun praktik, dipelajari dengan teliti.",
-      ]);
+      // Classroom::create([
+      //    "teacher_id" => 1,
+      //    "title" => "HTML",
+      //    "class" => "x",
+      //    "thumbnail_class" => "thumbnail-class/tes1.jpg",
+      //    "major" => "pplg",
+      //    "instructions" =>
+      //       "Pelajari materi lorem10 dan CSS: Memahami teori dasar HTML dan CSS serta bagaimana keduanya digunakan untuk membuat dan mempercantik halaman web.Saksikan video pembelajaran: Menonton video tutorial atau penjelasan terkait konsep HTML dan CSS, seperti cara membuat struktur HTML atau menggunakan CSS untuk styling.Pelajari semua materinya: Memastikan setiap bagian materi yang disediakan, baik teori maupun praktik, dipelajari dengan teliti.",
+      // ]);
+      // Classroom::create([
+      //    "teacher_id" => 1,
+      //    "title" => "CSS",
+      //    "class" => "xi",
+      //    "thumbnail_class" => "thumbnail-class/tes1.jpg",
+      //    "major" => "pplg",
+      //    "instructions" =>
+      //       "Pelajari materi HTML dan CSS: Memahami teori dasar HTML dan CSS serta bagaimana keduanya digunakan untuk membuat dan mempercantik halaman web.Saksikan video pembelajaran: Menonton video tutorial atau penjelasan terkait konsep HTML dan CSS, seperti cara membuat struktur HTML atau menggunakan CSS untuk styling.Pelajari semua materinya: Memastikan setiap bagian materi yang disediakan, baik teori maupun praktik, dipelajari dengan teliti.",
+      // ]);
+      // Classroom::create([
+      //    "teacher_id" => 1,
+      //    "title" => "Laravel",
+      //    "class" => "xii",
+      //    "thumbnail_class" => "thumbnail-class/tes1.jpg",
+      //    "major" => "pplg",
+      //    "instructions" =>
+      //       "Pelajari materi HTML dan CSS: Memahami teori dasar HTML dan CSS serta bagaimana keduanya digunakan untuk membuat dan mempercantik halaman web.Saksikan video pembelajaran: Menonton video tutorial atau penjelasan terkait konsep HTML dan CSS, seperti cara membuat struktur HTML atau menggunakan CSS untuk styling.Pelajari semua materinya: Memastikan setiap bagian materi yang disediakan, baik teori maupun praktik, dipelajari dengan teliti.",
+      // ]);
 
-      Enrollment::create([
-         "classroom_id" => 1,
-         "user_id" => 4,
-         "status" => "enrolled",
-      ]);
-      Enrollment::create([
-         "classroom_id" => 1,
-         "user_id" => 5,
-         "status" => "enrolled",
-      ]);
-      Enrollment::create([
-         "classroom_id" => 1,
-         "user_id" => 6,
-         "status" => "enrolled",
-      ]);
+      // Enrollment::create([
+      //    "classroom_id" => 1,
+      //    "user_id" => 4,
+      //    "status" => "enrolled",
+      // ]);
    }
 }

@@ -7,7 +7,7 @@
 @endif
 
 
-<aside id="sidebar" class="w-[300px] fixed top-[90px] lg:left-0 left-[-300px] bottom-0 z-[99] bg-white shadow">
+<aside id="sidebar" class="w-[300px] fixed top-[90px] lg:left-0 left-[-300px] bottom-0 z-[98] bg-white shadow">
 	@can('student')
 		{{-- Profile --}}
 		<div class="flex flex-col items-center justify-center mt-8">

@@ -5,21 +5,8 @@
 		<h2 class="sm:block hidden text-2xl font-bold tracking-widest">SMKN 46 <br>JAKARTA</h2>
 	</div>
 
-	{{-- Search Bar --}}
-	<div class="flex-1 items-center justify-center lg:flex hidden flex-shrink-1">
-		<div class="search-box flex py-3 px-4 justify-center bg-[#E8E8E8] gap-4 rounded items-center">
-			<input type="text" placeholder="Search courses..."
-				class="flex-grow flex-shrink w-full min-w-[300px] max-w-[400px] text-slate-800 focus:outline-none bg-transparent">
-			<i class="fa-solid fa-magnifying-glass text-slate-800"></i>
-		</div>
-	</div>
-
 	{{-- Nav Link --}}
 	<div class="nav-section h-full items-center flex sm:w-[300px] w-1/2 justify-end gap-2 flex-shrink-1 pr-[30px]">
-		<div id="search-sm-btn"
-			class="lg:hidden flex p-4 rounded justify-center bg-[#E8E8E8] group hover:bg-[#4A5B92] cursor-pointer transition-all">
-			<i class="fa-solid fa-magnifying-glass text-slate-800 group-hover:text-white"></i>
-		</div>
 		<div id="toggle-sidebar-btn"
 			class="flex text-slate-800 p-4 rounded justify-center bg-[#E8E8E8] group hover:bg-[#4A5B92] cursor-pointer transition-all">
 			<i class="fa-solid fa-bars  group-hover:text-white"></i>
