@@ -51,7 +51,7 @@
 						</div>
 						<div class="flex flex-col gap-1">
 							<h3 class="text-[#4A5B92] font-semibold">Major</h3>
-							<p>{{ $student->major }}</p>
+							<p>{{ $student->getMajorUpper() }}</p>
 						</div>
 						<div class="flex flex-col gap-1">
 							<h3 class="text-[#4A5B92] font-semibold">Date of Birth</h3>

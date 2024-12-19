@@ -16,17 +16,20 @@ use App\Http\Controllers\SubmissionController;
 Route::redirect("/", "/login");
 Route::redirect("/teacher", "/teacher/home");
 
-// Authentication
-Route::get("/register", [SesiController::class, "formRegister"]);
-Route::post("/register/submit", [SesiController::class, "submitRegister"])->name("registrasi.submit");
-Route::middleware(["guest"])->group(function () {
-   Route::get("/login", [SesiController::class, "index"])->name("login");
-   Route::post("/login", [SesiController::class, "login"]);
-   Route::get("/register", [RegisterController::class, "register"])->name("tampilan.register");
-});
 Route::post("/logout", [SesiController::class, "logout"])
    ->name("logout")
    ->middleware("auth");
+
+// Authentication
+Route::middleware(["guest"])->group(function () {
+   Route::get("/register", [SesiController::class, "formRegister"]);
+   Route::post("/register/submit", [SesiController::class, "submitRegister"])->name("registrasi.submit");
+   Route::middleware(["guest"])->group(function () {
+      Route::get("/login", [SesiController::class, "index"])->name("login");
+      Route::post("/login", [SesiController::class, "login"]);
+      Route::get("/register", [RegisterController::class, "register"])->name("tampilan.register");
+   });
+});
 
 Route::middleware(["auth"])->group(function () {
    Route::get("/dashboard/admin", [AdminController::class, "admin"])
@@ -55,13 +58,9 @@ Route::middleware(["auth"])->group(function () {
    //Setting era
    Route::get("/dashboard/admin/setting", [AdminController::class, "setting"])->name("admin.setting");
    Route::post("/admin/update-jumbotron", [AdminController::class, "updateJumbotron"])->name("admin.update.jumbotron");
-
-   // Route::get('/dashboard-teacher/home',[AdminController::class,'guru'])->middleware(UserAccess::class.':guru');
 });
 
 Route::middleware(["auth"])->group(function () {
-   // Route::get('/dashboard/admin',[AdminController::class,'admin'])->middleware(UserAccess::class.':admin');
-   // Route::get('/dashboard-teacher/home',[AdminController::class,'guru'])->middleware(UserAccess::class.':guru');
    Route::controller(StudentController::class)->group(function () {
       Route::get("/home", "index")->name("student.home")->middleware("check.profile.data");
       Route::get("/profile", "profile")->name("student.profile");
@@ -74,11 +73,14 @@ Route::middleware(["auth"])->group(function () {
 
    Route::controller(EnrollmentController::class)->group(function () {
       Route::post("/classes/{classroom}/enrollment", "studentClassEnrollment")->name("student.class.enrollment");
+      Route::post("/teacher/classes/{classroom}/{user}/enrollment", "enrollStudent");
    });
 
    Route::controller(TeacherController::class)->group(function () {
-      Route::get("/teacher/home", "index");
+      Route::get("/teacher/home", "index")->middleware("check.profile.data");
       Route::get("/teacher/classes", "showClasses");
+      Route::get("/teacher/complete-profile", "completeProfile");
+      Route::post("/teacher/complete-profile-post", "completeProfilePost");
       Route::get("/teacher/profile", "profile")->name("teacher.profile");
       Route::get("/teacher/update-profile/{teacher:nip}", "showUpdateProfile");
       Route::put("/teacher/update-profile/{teacher:nip}/put", "updateProfilePut")->name("teacher.update.pp");
@@ -95,6 +97,7 @@ Route::middleware(["auth"])->group(function () {
       Route::post("/teacher/classes/create-class/post", "createClass")->name("create.class");
       Route::get("/teacher/classes/{classroom}/classwork", "showClasswork")->name("show.classwork");
       Route::get("/teacher/classes/{classroom}/people", "showClassworkPeople")->name("show.classwork.people");
+      Route::delete("/teacher/classes/{classroom}/people/{user}/delete", "deleteStudent")->name("delete.student");
       Route::delete("/teacher/classes/{classroom}/delete", "deleteClass")->name("delete.class");
       Route::get("/teacher/classes/{classroom}/update-class", "showUpdateClass")->name("show.update.class");
       Route::put("/teacher/classes/{classroom}/update", "updateClass")->name("update.class");

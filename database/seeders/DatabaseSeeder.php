@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Classroom;
+use App\Models\Enrollment;
 use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\User;
@@ -18,34 +19,103 @@ class DatabaseSeeder extends Seeder
    {
       // User::factory(10)->create();
 
-      // User::factory()->createMany([
-      //    [
-      //       "name" => "admin",
-      //       "username" => "admin",
-      //       "email" => "admin@lms.com",
-      //       "password" => bcrypt("password"),
-      //       "role" => "admin",
-      //    ],
-      //    [
-      //       "name" => "guru",
-      //       "username" => "guru",
-      //       "email" => "guru@lms.com",
-      //       "password" => bcrypt("password"),
-      //       "role" => "teacher",
-      //    ],
-      //    [
-      //       "name" => "siswa",
-      //       "username" => "siswa",
-      //       "email" => "siswa@lms.com",
-      //       "password" => bcrypt("password"),
-      //       "role" => "student",
-      //    ],
-      // ]);
+      User::factory()->createMany([
+         [
+            "name" => "admin",
+            "username" => "admin",
+            "email" => "admin@lms.com",
+            "password" => bcrypt("password"),
+            "role" => "admin",
+         ],
+         [
+            "name" => "guru",
+            "username" => "guru",
+            "email" => "guru@lms.com",
+            "password" => bcrypt("password"),
+            "role" => "teacher",
+         ],
+         [
+            "name" => "guru",
+            "username" => "guru",
+            "email" => "guru2@lms.com",
+            "password" => bcrypt("password"),
+            "role" => "teacher",
+         ],
+         [
+            "name" => "siswa",
+            "username" => "siswa",
+            "email" => "siswa1@lms.com",
+            "password" => bcrypt("password"),
+            "role" => "student",
+         ],
+         [
+            "name" => "siswa",
+            "username" => "siswa",
+            "email" => "siswa2@lms.com",
+            "password" => bcrypt("password"),
+            "role" => "student",
+         ],
+         [
+            "name" => "siswa",
+            "username" => "siswa",
+            "email" => "siswa3@lms.com",
+            "password" => bcrypt("password"),
+            "role" => "student",
+         ],
+         [
+            "name" => "siswa",
+            "username" => "siswa",
+            "email" => "siswa4@lms.com",
+            "password" => bcrypt("password"),
+            "role" => "student",
+         ],
+         [
+            "name" => "siswa",
+            "username" => "siswa",
+            "email" => "siswa5@lms.com",
+            "password" => bcrypt("password"),
+            "role" => "student",
+         ],
+      ]);
 
-      // Student::create([
-      //     'user_id' => 3,
-      //     'username' => 'siswa',
-      // ]);
+      Student::factory()->createMany([
+         [
+            "user_id" => 4,
+            "fullname" => "ANDIIIIII",
+            "nis" => 23453,
+            "major" => "pplg",
+            "grade" => "10",
+            "date_of_birth" => "2024-12-26",
+            "gender" => "male",
+         ],
+         [
+            "user_id" => 5,
+            "fullname" => "WERRR",
+            "nis" => 23653,
+            "major" => "pplg",
+            "grade" => "10",
+            "date_of_birth" => "2024-12-26",
+            "gender" => "male",
+         ],
+         [
+            "user_id" => 6,
+            "fullname" => "ANDIIIIISDKLFJ",
+            "nis" => 23403,
+            "major" => "pplg",
+            "grade" => "10",
+            "date_of_birth" => "2024-12-26",
+            "gender" => "male",
+         ],
+         [
+            "user_id" => 7,
+            "fullname" => "JKLJLJKJJ",
+            "nis" => 234033,
+            "major" => "dkv",
+            "grade" => "11",
+            "date_of_birth" => "2024-12-26",
+            "gender" => "male",
+         ],
+      ]);
 
       Teacher::create([
          "user_id" => 2, // Misalnya, ID pengguna yang sudah ada
@@ -81,6 +151,12 @@ class DatabaseSeeder extends Seeder
       //    "major" => "pplg",
       //    "instructions" =>
       //       "Pelajari materi HTML dan CSS: Memahami teori dasar HTML dan CSS serta bagaimana keduanya digunakan untuk membuat dan mempercantik halaman web.Saksikan video pembelajaran: Menonton video tutorial atau penjelasan terkait konsep HTML dan CSS, seperti cara membuat struktur HTML atau menggunakan CSS untuk styling.Pelajari semua materinya: Memastikan setiap bagian materi yang disediakan, baik teori maupun praktik, dipelajari dengan teliti.",
+      // ]);
+
+      // Enrollment::create([
+      //    "classroom_id" => 1,
+      //    "user_id" => 4,
+      //    "status" => "enrolled",
       // ]);
    }
 }

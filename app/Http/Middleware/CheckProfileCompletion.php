@@ -17,11 +17,16 @@ class CheckProfileCompletion
    public function handle(Request $request, Closure $next): Response
    {
       $user = Auth::user();
+      $userRole = $user->role;
 
-      $student = $user->role == "student" ? $user->student : null;
-
-      if (!$student || !$student->isProfileComplete()) {
-         session()->flash("complete.profile", "Your profile is incomplete. Please update it to continue.");
+      if ($userRole === "student") {
+         if (!$user->student || !$user->student->isProfileComplete()) {
+            session()->flash("complete.profile", "Your profile is incomplete. Please update it to continue.");
+         }
+      } elseif ($userRole === "teacher") {
+         if (!$user->teacher || !$user->teacher->isProfileComplete()) {
+            session()->flash("complete.profile", "Your profile is incomplete. Please update it to continue.");
+         }
       }
 
       return $next($request);

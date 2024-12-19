@@ -19,9 +19,26 @@ class StudentController extends Controller
       $student = Student::where("user_id", $user)->first();
 
       $enrolledClass = Classroom::join("enrollments", "classrooms.id", "=", "enrollments.classroom_id")->where("enrollments.user_id", $user)->where("enrollments.status", "enrolled")->select("classrooms.*")->get();
+      $enrolledClassIds = Classroom::join("enrollments", "classrooms.id", "=", "enrollments.classroom_id")->where("enrollments.user_id", $user)->where("enrollments.status", "enrolled")->select("classrooms.*")->pluck("id");
 
       $assignments = $enrolledClass->flatMap(function ($class) {
-         return $class->materials->where("material_type", "assignment")->where("deadline", ">", now());
+         // Ambil materials yang sesuai dengan jenis "assignment" dan deadline yang belum lewat
+         return $class->materials
+            ->where("material_type", "assignment")
+            ->where("deadline", ">", now()) // deadline yang masih berlaku
+            ->map(function ($material) use ($class) {
+               // Cek apakah user sudah mengerjakan materi ini
+               $submission = $material->submissions
+                  ->where("user_id", Auth::user()->id)
+                  ->where("classroom_id", $class->id)
+                  ->first(); // Ambil submission pertama yang cocok
+
+               // Menambahkan status apakah sudah dikerjakan atau belum
+               return [
+                  "material" => $material,
+                  "is_submitted" => $submission ? true : false, // true jika sudah ada submission
+               ];
+            });
       });
 
       return view("student.home", [
@@ -46,7 +63,7 @@ class StudentController extends Controller
    public function completeProfile()
    {
       return view("student.complete-profile", [
-         "title" => "Update Profile",
+         "title" => "Complete Profile",
       ]);
    }
 
@@ -111,26 +128,17 @@ class StudentController extends Controller
       return redirect()->route("student.profile")->with("update.profile.success", "Your profile has been updated successfully!");
    }
 
-   public function showClassList(Request $request)
+   public function showClassList()
    {
-      $major = $request->query("major");
-      $level = $request->query("level");
-
-      $classes = Classroom::query();
-
-      if ($major) {
-         $classes->where("major", $major);
-      }
-
-      if ($level) {
-         $classes->where("class", $level);
-      }
-
-      $classes = $classes->get();
+      $student = Auth::user()->student;
+      $classes = Classroom::where("major", $student->major)
+         ->where("class", $student->gradeToRoman())
+         ->get();
 
       return view("student.classes", [
          "title" => "Classes",
          "classes" => $classes,
+         "student" => $student,
       ]);
    }
 }

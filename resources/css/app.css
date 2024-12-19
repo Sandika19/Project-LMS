@@ -74,3 +74,17 @@ footer {
 .sticky-at-bottom {
    @apply fixed bottom-0 left-0 right-0;
 }
+
+.text-center-important {
+   text-align: center !important;
+}
+
+.text-class10 {
+   @apply text-[#55997C];
+}
+.text-class11 {
+   @apply text-[#4A5B92];
+}
+.text-class12 {
+   @apply text-[#A03739];
+}
