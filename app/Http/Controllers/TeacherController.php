@@ -166,7 +166,7 @@ class TeacherController extends Controller
          ->get();
 
       return view("teacher.recap-details", [
-         "title" => "Recap",
+         "title" => "Recap Details | $classroom->title Class",
          "classroom" => $classroom,
          "assignments" => $assignments,
          "enrolledUsers" => $enrolledUsers,

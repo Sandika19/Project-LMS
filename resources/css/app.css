@@ -40,7 +40,7 @@ footer {
 
 /* == Nav Link Sidebar == */
 .nav-link-sidebar {
-   @apply flex w-full items-center justify-start gap-4 border-[#4A5B92] py-3 pl-7 hover:border-r-[5px] hover:bg-[#A9BBF4] hover:bg-opacity-[50%];
+   @apply flex w-full items-center justify-start gap-4 py-3 pl-7 hover:bg-[#A9BBF4] hover:bg-opacity-[50%];
 }
 
 .nav-link-active {
