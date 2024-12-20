@@ -20,6 +20,8 @@ class User extends Authenticatable
     */
    protected $guarded = ["id"];
 
+   protected $with = ["student", "teacher"];
+
    /**
     * The attributes that should be hidden for serialization.
     *
@@ -73,8 +75,8 @@ class User extends Authenticatable
          ->withTimestamps();
    }
 
-   public function submission()
+   public function submissions()
    {
-      return $this->hasOne(Submission::class);
+      return $this->hasMany(Submission::class);
    }
 }

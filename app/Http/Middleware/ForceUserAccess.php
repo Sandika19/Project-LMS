@@ -24,11 +24,11 @@ class ForceUserAccess
       // Ambil peran pengguna yang login
       $userRole = Auth::user()->role;
 
-      if ($userRole === "teacher") {
+      if ($userRole === "teacher" && !$request->is('teacher/home')) {
          return redirect()->to("/teacher/home");
-      } elseif ($userRole === "student") {
+     } elseif ($userRole === "student" && !$request->is('home')) {
          return redirect()->to("/home");
-      }
+     }
 
       // Jika tidak ada redirect, lanjutkan permintaan
       return $next($request);

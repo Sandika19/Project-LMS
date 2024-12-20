@@ -153,16 +153,21 @@ if (addContentButton && dropdown) {
 // == FOOTER ==
 const footerSection = document.getElementById("footer");
 
-function isScrollbarVisible() {
-   return document.body.scrollHeight > window.innerHeight || document.documentElement.scrollHeight > window.innerHeight;
+function adjustFooterPosition() {
+   // Memeriksa apakah scroll bar muncul
+   if (document.body.scrollHeight <= window.innerHeight) {
+      // Jika tidak ada scrollbar, buat footer tetap di bawah
+      footerSection.classList.add("sticky-at-bottom");
+   } else {
+      // Jika ada scrollbar, hapus sticky class
+      footerSection.classList.remove("sticky-at-bottom");
+   }
 }
 
-if (!isScrollbarVisible()) {
-   footerSection.classList.add("sticky-at-bottom");
-} else {
-   footerSection.classList.remove("sticky-at-bottom");
-}
-// != FOOTER =!
+// Panggil fungsi saat halaman dimuat dan saat ukuran jendela berubah
+window.addEventListener("load", adjustFooterPosition);
+window.addEventListener("resize", adjustFooterPosition);
+// == FOOTER =!
 
 // == STUDENT CLASSES ==
 const majorSelect = document.getElementById("major-select-class");
@@ -186,3 +191,98 @@ if (majorSelect) {
    });
 }
 // != STUDENT CLASSES =!
+
+// == DELETE STUDENT FROM CLASS ==
+const deleteStudentBtn = document.querySelectorAll(".delete-student-btn");
+const deleteStudentForms = document.querySelectorAll(".delete-student-form");
+
+if (deleteStudentBtn) {
+   deleteStudentBtn.forEach((btn, i) => {
+      btn.addEventListener("click", () => {
+         deleteStudentForms[i].classList.toggle("hidden");
+      });
+
+      document.addEventListener("click", (e) => {
+         if (!e.target.closest(".delete-student-btn")) {
+            deleteStudentForms.forEach((form) => {
+               form.classList.add("hidden");
+            });
+         }
+      });
+   });
+}
+// != DELETE STUDENT FROM CLASS =!
+
+// == GET DATA UNENROLLED STUDENTS ==
+$(document).ready(function () {
+   let classId = $("#container").data("class-id");
+   let studentList = $("#unenrolled-student-list");
+
+   if (classId) {
+      $.ajaxSetup({
+         headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+         },
+      });
+
+      $("#loading-row").removeClass("hidden");
+
+      $.ajax({
+         type: "GET",
+         url: `/api/teacher/classes/${classId}/people`,
+         data: {},
+         dataType: "json",
+         success: function ({ data }) {
+            if (data.length != 0) {
+               $.each(data, function (i, data) {
+                  $("#loading-row").addClass("hidden");
+                  studentList.append(`
+                  <tr>
+                     <td>${i + 1}</td>
+                     <td>${data.student.fullname}</td>
+                     <td>${data.student.nis}</td>
+                     <td>${numberToRoman(data.student.grade)}</td>
+                     <td>${data.student.major.toUpperCase()}</td>
+                     <td>
+                        <form action="/teacher/classes/${classId}/${data.id}/enrollment" method="POST" class="enroll-student-form">
+                           <input type="hidden" name="_token" value="${$('meta[name="csrf-token"]').attr("content")}">
+                           <button type="submit" class="py-2 px-6 font-semibold text-sm bg-[#A9BBF4] rounded-md text-black hover:bg-[#4A5B92] hover:text-white">
+                              Enroll
+                           </button>
+                        </form>
+                     </td>
+                  </tr>
+               `);
+               });
+            } else {
+               $("#loading-row").addClass("hidden");
+               studentList.append(`
+               <tr>
+                  <td colspan="6">
+                     <div class="text-center">Data not available</div>
+                  </td>
+               </tr>
+            `);
+            }
+         },
+         error: function (xhr, status, error) {
+            console.error("Error:", error);
+         },
+      });
+   }
+});
+
+function numberToRoman(num) {
+   switch (num) {
+      case "10":
+         return "X";
+      case "11":
+         return "XI";
+      case "12":
+         return "XII";
+      default:
+         return "";
+   }
+}
+
+// != GET DATA UNENROLLED STUDENTS =!

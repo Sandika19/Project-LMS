@@ -2,17 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class SesiController extends Controller
 {
-   function index()
-   {
-      return view("login", [
-         "title" => "Login",
-      ]);
-   }
+    function index(){
+        return view('login', [
+            'title' => 'Login'
+        ]);
+    }
+
+    function formRegister(){
+        return view('register');
+    }
+
+    function submitRegister(Request $request){
+        $user = new User();
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->save();
+        // dd($user);
+        return redirect()->route('login');
+
+    }
 
    function login(Request $request)
    {

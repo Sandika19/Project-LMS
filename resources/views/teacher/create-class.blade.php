@@ -5,7 +5,8 @@
 		<div class="max-w-5xl w-full mx-auto ">
 			<div class="">
 				<h2 class="text-3xl font-bold mb-4">Create Class</h2>
-				<hr class="h-0.5 w-full bg-black mb-10">
+				<hr>
+				<hr class="h-0.5 w-full bg-black mb-10" />
 
 				<form action="{{ route('create.class') }}" method="post" class="p-7 text-xl bg-white rounded-md"
 					enctype="multipart/form-data" id="create-class-form">
@@ -37,29 +38,6 @@
 									<option value="xii">XII</option>
 								</select>
 								@error('class')
-									<div class="text-red-600 text-xs absolute bottom-[-20px]">
-										{{ $message }}
-									</div>
-								@enderror
-							</div>
-						</div>
-
-						<div class="flex flex-col justify-center gap-3 relative">
-							<label class="px-3 font-medium text-[#414141] text-opacity-50" for="major">Major<span
-									class="text-red-500">*</span></label>
-							<div class="bg-[#e8e8e8] w-full rounded-md relative overflow-hidden">
-								<i
-									class="fa-solid fa-sort-down absolute right-[12px] text-[#414141] text-opacity-50 top-1/2 translate-y-[-70%]"></i>
-								<select name="major" required
-									class="w-full py-4 pl-3 pr-7 appearance-none bg-transparent outline-none text-[#414141] text-opacity-50 overflow-hidden text-ellipsis">
-									<option value="" disabled selected>Select major</option>
-									<option value="pplg">PENGEMBANGAN PERANGKAT LUNAK DAN GIM</option>
-									<option value="dkv">DESAIN KOMUNIKASI VISUAL</option>
-									<option value="akl">AKUNTANSI DAN KEUANGAN LEMBAGA</option>
-									<option value="bdp">BISNIS DARING DAN PEMASARAN</option>
-									<option value="otkp">OTOMATISASI DAN TATA KELOLA PERKANTORAN</option>
-								</select>
-								@error('major')
 									<div class="text-red-600 text-xs absolute bottom-[-20px]">
 										{{ $message }}
 									</div>

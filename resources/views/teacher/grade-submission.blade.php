@@ -29,7 +29,7 @@
 
 											<img
 												src="{{ Storage::url($submission->user->student->profile_picture ?? '/profile-default/student-profile-default.png') }}"
-												class="size-8" alt="">
+												class="size-8 rounded-full" alt="">
 
 											<p>{{ $submission->user->student->fullname }}</p>
 										</div>

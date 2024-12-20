@@ -16,13 +16,45 @@ class TeacherController extends Controller
    {
       $user = Auth::user()->id;
       $teacher = Teacher::where("user_id", $user)->first();
-      $class = Classroom::where("teacher_id", $teacher->id)->get();
+      if ($teacher) {
+         $class = Classroom::where("teacher_id", $teacher->id)->get();
+      } else {
+         $class = [];
+      }
 
       return view("teacher.home", [
          "title" => "Home",
          "teacher" => $teacher,
          "classes" => $class,
       ]);
+   }
+
+   public function completeProfile()
+   {
+      return view("teacher.complete-profile", [
+         "title" => "Complete Profile",
+      ]);
+   }
+
+   public function completeProfilePost(Request $request)
+   {
+      $validatedData = $request->validate([
+         "fullname" => "required|string|max:255",
+         "nip" => "required",
+         "major" => "required|in:pplg,dkv,akl,otkp,bdp",
+         "date_of_birth" => "required|date",
+         "gender" => "required|in:male,female",
+         "profile_picture" => "file|mimes:jpg,jpeg,png|max:3000",
+      ]);
+
+      if ($request->file("profile_picture")) {
+         $validatedData["profile_picture"] = $request->file("profile_picture")->store("teacher-profile", "public");
+      }
+
+      $validatedData["user_id"] = Auth::user()->id;
+
+      Teacher::create($validatedData);
+      return redirect()->route("teacher.profile")->with("update.profile.success", "Your profile has been updated successfully!");
    }
 
    public function showClasses()
@@ -122,18 +154,23 @@ class TeacherController extends Controller
 
    public function showRecapDetails(Classroom $classroom)
    {
-      $assignment = Material::where("classroom_id", $classroom->id)
-         ->where("material_type", "assignment")
-         ->get();
+      $assignments = $classroom->materials->where("material_type", "assignment");
+      $assignmentIds = $assignments->pluck("id")->toArray();
 
       $enrolledUsers = $classroom->users()->wherePivot("status", "enrolled")->get();
-      // $submit = $enrolledUsers->submission->first();
+      $enrolledUserIds = $enrolledUsers->pluck("id")->toArray();
+
+      $studentSubmissions = Submission::whereIn("material_id", $assignmentIds)
+         ->where("classroom_id", $classroom->id)
+         ->where("user_id", $enrolledUserIds)
+         ->get();
 
       return view("teacher.recap-details", [
-         "title" => "Recap",
+         "title" => "Recap Details | $classroom->title Class",
          "classroom" => $classroom,
-         "assignments" => $assignment,
+         "assignments" => $assignments,
          "enrolledUsers" => $enrolledUsers,
+         "submissions" => $studentSubmissions,
       ]);
    }
 }

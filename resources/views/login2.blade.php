@@ -11,7 +11,7 @@
 <div>
     <form wire:submit="login" method="post" class="flex justify-center min-h-screen items-center">
         @csrf
-    <div class="flex  w-full max-w-sm max-w-sm flex-col gap-6">
+    <div class="flex  w-full max-w-sm flex-col gap-6">
         <div class="flex flex-col items-center">
             <h1 class="text-3xl font-semibold">Sign In</h1>
             <p class="text-sm">Sign in to access your account</p>

@@ -92,7 +92,7 @@ if (logoutForm) {
 }
 
 // Complete Profile Alert
-function completeProfileAlert(text) {
+function completeProfileAlert(text, role = "") {
    Swal.fire({
       title: "Profile Not Complete",
       text,
@@ -104,7 +104,7 @@ function completeProfileAlert(text) {
    }).then((result) => {
       if (result.isConfirmed) {
          // Redirect to the form page
-         window.location.href = "/complete-profile";
+         window.location.href = `${role}/complete-profile`;
       }
    });
 }
@@ -198,5 +198,33 @@ if (studentAssignmentForm) {
       text: "Are you sure you want to submit this assignment? Once submitted, you will no longer be able to make changes.",
       confirmButtonText: "Submit",
       element: studentAssignmentForm,
+   });
+}
+
+// Confirmation Delete Student From Class
+const deleteStudentForm = document.querySelectorAll(".delete-student-form");
+if (deleteStudentForm) {
+   deleteStudentForm.forEach((deleteStudent) => {
+      warningAlert({
+         title: "Are You Sure?",
+         text: "Deleting this student will remove all their data permanently. This action is irreversible.",
+         confirmButtonText: "Delete",
+         element: deleteStudent,
+      });
+   });
+}
+
+const studentList = document.querySelector("#unenrolled-student-list");
+if (studentList) {
+   studentList.addEventListener("submit", function (e) {
+      if (e.target.classList.contains("enroll-student-form")) {
+         e.preventDefault();
+         warningAlert({
+            title: "Confirm Enrollment",
+            text: "You are about to enroll this student into your class. They will gain access to all related materials. Do you want to continue?",
+            confirmButtonText: "Enroll",
+            element: e.target,
+         });
+      }
    });
 }

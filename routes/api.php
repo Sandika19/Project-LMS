@@ -1,27 +1,22 @@
 <?php
+use App\Http\Controllers\ClassroomController;
+use App\Http\Resources\UnenrolledStudentsDetails;
 use App\Models\Classroom;
-use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Storage;
 
-Route::get("/classes", function (Request $request) {
-   $major = $request->query("major");
-   $level = $request->query("level");
+Route::get("/teacher/classes/{classroom}/people", function (Classroom $classroom) {
+   // $enrolledUsers = $classroom->users()->wherePivot("status", "enrolled")->get();
 
-   $query = Classroom::query();
+   $enrolledUserIds = $classroom->enrollments()->pluck("user_id");
+   $unenrolledUsers = User::whereNotIn("users.id", $enrolledUserIds)
+      ->join("students", "students.user_id", "=", "users.id")
+      ->where("students.major", $classroom->major)
+      ->where("students.grade", $classroom->classToNumber())
+      ->select("users.*")
+      ->get();
 
-   // Filter berdasarkan major jika tersedia
-   if ($major) {
-      $query->where("major", $major);
-   }
-
-   // Filter berdasarkan level jika tersedia
-   if ($level) {
-      $query->where("class", $level);
-   }
-
-   $classes = $query->get();
-   return response()->json($classes);
+   return UnenrolledStudentsDetails::collection($unenrolledUsers);
 });
 
 ?>

@@ -5,6 +5,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<meta name="csrf-token" content="{{ csrf_token() }}">
 		<title>{{ $title ?? 'LMS SMKN 46 JAKARTA' }}</title>
 
 		{{-- Vite --}}
@@ -22,7 +23,36 @@
 		<link
 			href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
 			rel="stylesheet">
+
+		{{-- jQuery --}}
+		<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+			integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
 	</head>
+
+	<style>
+		/* CSS untuk container utama */
+		.flex-container {
+			display: flex;
+			flex-direction: column;
+			min-height: 100vh;
+			/* Tinggi minimum sama dengan viewport */
+		}
+
+		/* Area konten utama */
+		.content {
+			flex: 1;
+			/* Konten utama akan mengisi ruang di antara header dan footer */
+		}
+
+		/* Footer */
+		.footer {
+			background-color: #4A5B92;
+			text-align: center;
+			padding: 16px;
+			color: white;
+		}
+	</style>
 
 	<body class="w-full bg-[#E8E8E8] pt-[90px] h-full">
 		{{-- === Header === --}}
